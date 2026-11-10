@@ -197,7 +197,7 @@ def run_app():
         Application.Run(app)
     except Exception as e:
         import traceback
-        Path(r"D:\Dev\ComfyUI\tools\shopee_all_in_one_app.log").write_text(traceback.format_exc(), encoding="utf-8")
+        (Path(__file__).parent / "shopee_all_in_one_app.log").write_text(traceback.format_exc(), encoding="utf-8")
 
 def main():
     try:
@@ -207,7 +207,7 @@ def main():
         t.Join()
     except Exception as e:
         import traceback
-        Path(r"D:\Dev\ComfyUI\tools\shopee_all_in_one_app.log").write_text(traceback.format_exc(), encoding="utf-8")
+        (Path(__file__).parent / "shopee_all_in_one_app.log").write_text(traceback.format_exc(), encoding="utf-8")
 
 if __name__ == "__main__":
     main()

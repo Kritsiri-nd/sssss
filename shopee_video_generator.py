@@ -20,13 +20,13 @@ if sys.stdout.encoding and sys.stdout.encoding.lower() != 'utf-8':
         pass
 
 # Paths
-BASE_DIR = Path(r"D:\Dev\ComfyUI\tools\shopee_poster")
+BASE_DIR = Path(__file__).resolve().parent
 ASSETS_DIR = BASE_DIR / "assets"
 STYLES_DIR = ASSETS_DIR / "styles"
-COMFY_ROOT = Path(r"D:\Dev\ComfyUI\ComfyUI-Data\ComfyUI-Installs\ComfyUI\ComfyUI")
+COMFY_ROOT = Path(load_env_val("COMFY_ROOT", r"D:\Dev\ComfyUI\ComfyUI-Data\ComfyUI-Installs\ComfyUI\ComfyUI"))
 COMFY_INPUT = COMFY_ROOT / "input"
 COMFY_OUTPUT = COMFY_ROOT / "output"
-COMFY_API = "http://127.0.0.1:8188"
+COMFY_API = load_env_val("COMFY_API", "http://127.0.0.1:8188")
 FFMPEG = shutil.which("ffmpeg") or "ffmpeg"
 FFPROBE = shutil.which("ffprobe") or "ffprobe"
 FONT_PATH = r"C:\Windows\Fonts\tahomabd.ttf"

@@ -9,9 +9,10 @@ sys.stdout.reconfigure(encoding="utf-8")
 sys.stderr.reconfigure(encoding="utf-8")
 
 QUEUE_DIR = Path(r"D:\Dev\ComfyUI\ugc_runpod_womenswear_20_2026-11-05\shopee_post_queue_2026-11-06")
-PREPARE_SCRIPT = Path(r"D:\Dev\ComfyUI\tools\shopee_prepare.py")
-TOUCH = Path(r"D:\Dev\ComfyUI\tools\shopee_touch.py")
-REVIEW_DIR = Path(r"C:\Users\krits\.gemini\antigravity\brain\08d6ea2b-be9b-4ffc-9fa4-a765dae735ce\reviews")
+BASE_DIR = Path(__file__).resolve().parent
+PREPARE_SCRIPT = BASE_DIR / "shopee_prepare.py"
+TOUCH = BASE_DIR / "shopee_touch.py"
+REVIEW_DIR = BASE_DIR / "reviews"
 REVIEW_DIR.mkdir(parents=True, exist_ok=True)
 PYTHON = sys.executable
 
@@ -38,7 +39,7 @@ ALL_ITEMS = [
     "spinnyhouse_ribbed_collared_top",   # 20
 ]
 
-PROGRESS_FILE = Path(r"D:\Dev\ComfyUI\tools\batch_progress.json")
+PROGRESS_FILE = BASE_DIR / "batch_progress.json"
 
 def load_progress():
     if PROGRESS_FILE.exists():
