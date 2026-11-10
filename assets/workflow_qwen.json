@@ -1,0 +1,119 @@
+{
+  "1": {
+    "class_type": "UnetLoaderGGUF",
+    "inputs": {
+      "unet_name": "qwen-image-2.1-UC-Q8_0.gguf"
+    }
+  },
+  "2": {
+    "class_type": "QwenImage21Cache",
+    "inputs": {
+      "model": [
+        "1",
+        0
+      ],
+      "device": "auto",
+      "dtype": "default"
+    }
+  },
+  "3": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "qwen3vl_8b_int8_convrot.safetensors",
+      "type": "qwen_image",
+      "device": "default"
+    }
+  },
+  "4": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "qwen_image_2.1_vae_bf16.safetensors"
+    }
+  },
+  "5": {
+    "class_type": "TextEncodeQwenImage21",
+    "inputs": {
+      "clip": [
+        "3",
+        0
+      ],
+      "prompt": "Precisely create one photorealistic vertical 9:16 smartphone product-demo still using two references.\n<image1> is the style and composition reference only. Copy its ordinary handheld phone-camera framing, warm/cool balance, lighting direction, background character, contrast, natural shadows, and hand placement. Ignore and remove the original product, every title, caption, watermark, icon, seller mark, and BUY NOW graphic visible in <image1>.\n<image2> is the exact target product identity reference: Acer OSK293 ลำโพงบลูทูธ Bluetooth6.0 15w เสียงสเตอริโอเบสหนักแน่น แบตอึด พกพาง่าย (รับประกัน18เดือน). Preserve the real product's overall shape, proportion, materials, color, buttons, ports, straps, seams, camera arrangement, and any existing brand mark that is actually on the object. Ignore the advertising layout, text, price panels, badges, other color variants, and other products in <image2>. Show only one chosen product: Acer OSK293.\nRecreate the product in this real home scene: simple computer desk by a window, warm wood surface, open laptop or monitor in soft focus, afternoon daylight from the left. If a laptop or monitor is visible, its screen must contain only a softly blurred neutral image or abstract shapes with no readable words, logos, seller names, website names, or channel text. Do not add a desk plaque, sign board, printed prop, or extra display with text; keep background objects unmarked.\nStarting composition and hands: Stand the exact black Acer cylindrical portable speaker upright on the desk. The left hand steadies the lower body while the right index finger points to its front speaker grille and RGB light strip without changing the controls or lights. exactly two natural hands; no extra hands, keep the speaker upright. This is a single natural photo moment at the beginning of a product video, not a collage or a graphic.\nBoth wrists are bare with no watch, bracelet, fabric band, wrist strap, tattoo, or printed mark; do not copy the seller-branded wristband from the sample.\nKeep the exact product clearly visible and large enough to recognize. Use realistic skin, natural joints, believable hand shadows, correct object scale, and genuine phone-photo detail. Preserve the target product's appearance even if <image1> shows a different product.\nNo readable text anywhere in the image, no captions, price, CTA, watermark, added logo, extra hands, duplicated fingers, fused fingers, extra product parts, changed product design, collage, split screen, studio cutout, or dramatic perspective.",
+      "negative_prompt": "TOVShopping, TOV Shopping, Chanel, seller name, shop watermark, channel logo, seller plaque, desk sign, readable screen text, wristband text, seller bracelet, seller wristband, random letters, captions, added watermark",
+      "vae": [
+        "4",
+        0
+      ],
+      "resolution": 1024,
+      "images.image_1": [
+        "20",
+        0
+      ],
+      "images.image_2": [
+        "21",
+        0
+      ]
+    }
+  },
+  "7": {
+    "class_type": "KSampler",
+    "inputs": {
+      "model": [
+        "2",
+        0
+      ],
+      "positive": [
+        "5",
+        0
+      ],
+      "negative": [
+        "5",
+        1
+      ],
+      "latent_image": [
+        "5",
+        2
+      ],
+      "seed": 82922006,
+      "steps": 25,
+      "cfg": 1.0,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "denoise": 1.0
+    }
+  },
+  "8": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "7",
+        0
+      ],
+      "vae": [
+        "4",
+        0
+      ]
+    }
+  },
+  "9": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": [
+        "8",
+        0
+      ],
+      "filename_prefix": "hand_shopee_19_10s_2026-11-07/06_acer_osk293/qwen_scene"
+    }
+  },
+  "20": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "hand_shopee19_style_06.jpg"
+    }
+  },
+  "21": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "hand_shopee19_product_06.jpg"
+    }
+  }
+}

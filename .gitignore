@@ -1,0 +1,17 @@
+# Python artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+*.bak
+
+# Logs
+*.log
+shopee_web_server.log
+
+# Temporary review images
+reviews/*.png
+!reviews/.gitkeep
+
+# Environment secrets
+.env
+
